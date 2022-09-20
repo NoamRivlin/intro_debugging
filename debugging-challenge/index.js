@@ -94,17 +94,21 @@ chooseRandomButton.addEventListener('click', () => {
   createCards([characters[random]]);
 });
 
-// insert choosebuttons inside whats beteen comments into a function and call it each time you render cards
-const chooseButtons = Array.from(
-  document.getElementsByClassName('choose-button')
-);
+// insert choosebuttons inside whats between comments into a function and call it each time you render cards
 
-chooseButtons.forEach((button) => {
-  button.addEventListener('click', (e) => {
-    console.log([characters[e.target.id]]);
-    createCards([characters[e.target.id]]);
+const createChooseBtns = (arrayOfCharacter = characters) => {
+  const chooseButtons = Array.from(
+    document.getElementsByClassName('choose-button')
+  );
+
+  chooseButtons.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      console.log([arrayOfCharacter[e.target.id]]);
+      createCards([arrayOfCharacter[e.target.id]]);
+    });
   });
-});
+};
+createChooseBtns();
 //
 
 const selects = document.getElementsByTagName('select');
@@ -116,6 +120,7 @@ const reset = () => {
     select.value = 'all';
   });
   createCards(characters);
+  createChooseBtns();
 };
 
 resetButton.addEventListener('click', reset);
@@ -158,6 +163,7 @@ const filter = () => {
   //   console.log(filtered);
   // });
   createCards(filtered);
+  createChooseBtns(filtered);
 };
 
 filterButton.addEventListener('click', filter);
